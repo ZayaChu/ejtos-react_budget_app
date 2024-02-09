@@ -1,23 +1,25 @@
-import React, { useState} from 'react';
+import React, { useState,useContext, currency} from 'react';
+import { AppContext } from '../context/AppContext';
 
-const Budget = () => {const [setCurrency] = useState('');
-
-const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
+const Currency = () => {
+    let{currency, dispatch}=useContext(AppContext)
+    const [newCurrency, setNewCurrency] = useState(currency);
+    const changeCurrency = (event) => {
+    setNewCurrency(event.target.value);
+    dispatch({
+        type: 'CHG_CURRENCY',
+        payload: event.target.value,
+    });
+  }
   const divStyle = {
     background:'#9DC183',
     color:'white'
   };
-  
-
-
-
 return (
     <div className='alert alert-secondary' style={divStyle}>
-        
-    <select style={divStyle} id="inputGroupSelect02" onChange={handleChange}>
-            <option defaultValue>Currency</option>
+        <label>Currency ({currency})</label>
+   <select style={divStyle} id="currentCurrency" onChange={changeCurrency} value={newCurrency}>
+            
             <option value="$" name="dollar">$ Dollar</option>
             <option value="£" name="pound">£ Pound</option>
             <option value="€" name="euro">€ Euro</option>
@@ -26,4 +28,4 @@ return (
               </div>
 );
 };
-export default Budget;
+export default Currency;
