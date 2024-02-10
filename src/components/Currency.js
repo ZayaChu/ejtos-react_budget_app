@@ -1,4 +1,4 @@
-import React, { useState,useContext, currency} from 'react';
+import React, { useState,useContext, currency, name} from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Currency = () => {
@@ -17,9 +17,9 @@ const Currency = () => {
   };
 return (
     <div className='alert alert-secondary' style={divStyle}>
-        <label>Currency ({currency})</label>
+        <span>Currency </span>
    <select style={divStyle} id="currentCurrency" onChange={changeCurrency} value={newCurrency}>
-            
+           
             <option value="$" name="dollar">$ Dollar</option>
             <option value="£" name="pound">£ Pound</option>
             <option value="€" name="euro">€ Euro</option>
