@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, currency } from 'react';
 import { AppContext } from '../context/AppContext';
 const ExpenseTotal = () => {
     const { expenses,currency} = useContext(AppContext);

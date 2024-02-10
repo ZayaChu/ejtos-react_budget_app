@@ -30,6 +30,32 @@ export const AppReducer = (state, action) => {
                     ...state
                 }
             }
+            case 'REDUCE_EXPENSE':
+            let remaining= 2000;
+            remaining = state.expenses.reduce(
+                (previousExp, currentExp) => {
+                    return previousExp - currentExp.cost
+                },0
+            );
+            remaining = remaining + action.payload.cost;
+            action.type = "DONE";
+            if(remaining >= state.budget) {
+                remaining = 2000;
+                state.expenses.map((currentExp)=> {
+                    if(currentExp.name === action.payload.name) {
+                        currentExp.cost = action.payload.cost - currentExp.cost;
+                    }
+                    return currentExp
+                });
+                return {
+                    ...state,
+                };
+            } else {
+                alert("Cannot decrease the allocation! Remaining balance reached budget limit!");
+                return {
+                    ...state
+                }
+            }
             case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
